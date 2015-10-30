@@ -1,9 +1,13 @@
+
+
 # Byte-compiled / optimized / DLL files
-__pycache__/
+__pycache__
 *.py[cod]
 
-# C extensions
-*.so
+# Virtual environments
+env/
+venv/
+pyvenv/
 
 # Distribution / packaging
 .Python
@@ -42,6 +46,7 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *,cover
+.hypothesis
 
 # Translations
 *.mo
