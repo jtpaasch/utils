@@ -1,0 +1,59 @@
+#!/bin/sh
+
+SCRIPT=$0
+VENV="venv"
+
+function usage() {
+    echo "Usage: $SCRIPT [OPTIONS]"
+    echo ""
+    echo "  Runs . venv/bin/activate"
+    echo ""
+    echo "Options:"
+    echo "  --help    Display this help."
+    echo "  --venv    The virtualenv folder, if not 'venv'."
+    echo ""
+    echo "Example:"
+    echo "  $SCRIPT"
+    echo ""
+}
+
+while [ $# -gt 0 ]
+do
+
+    case $1 in
+
+        --help)
+            usage
+            ;;
+
+        --venv)
+            shift
+            if [ $# -gt 0 ]
+            then
+                VENV=$1
+            else
+                echo "Need a value for --venv"
+                usage
+                return 1
+            fi
+            ;;
+
+        *)
+            echo "Unrecognized option: $1"
+            usage
+            return 1
+            ;;
+
+    esac
+    shift
+
+done
+
+if [ -f $VENV/bin/activate ]
+then
+    . $VENV/bin/activate
+else
+    echo "No $VENV/bin/activate in this folder."
+    usage
+    return 1
+fi

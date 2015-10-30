@@ -1,0 +1,48 @@
+#!/bin/sh
+
+SCRIPT=$0
+
+function usage() {
+    echo "Usage: $SCRIPT COMMAND"
+    echo ""
+    echo "  De/Activate an xrandr screen(s) configuration."
+    echo ""
+    echo "Commands:"
+    echo "  list           List all screen profiles."
+    echo "  office on|off  Turn on/off office screens."
+    echo ""
+    echo "Example:"
+    echo "  $SCRIPT office on"
+    exit 1
+}
+
+case $1 in
+
+    list)
+        echo "Screen profiles:"
+        echo "-- office"
+        exit 1
+        ;;
+    
+    office)
+        shift
+        case $1 in
+
+            on) 
+                xrandr --output HDMI1 --auto --right-of eDP1
+                xrandr --output HDMI2 --auto --right-of HDMI1
+                ;;
+
+            off)
+                xrandr --output HDMI1 --off
+                xrandr --output HDMI2 --off
+                ;;
+            
+            *) usage;;
+
+        esac
+        ;;
+
+    *) usage;;
+
+esac
