@@ -25,7 +25,7 @@ Install with::
 
 See the help::
 
-    > activate --help
+    > . activate --help
 
 
 ## screens
@@ -45,6 +45,22 @@ Install with:
 
 See the help:
 
-    > activate --help
+    > screens --help
 
 
+## jenv
+
+Activate a particular version of Java. For instance, to use the Java
+installed at ``~/jubbajdk/jdk1.8.0_u66``, I'd do this:
+
+    > . jenv ~/jubbajdk/jdk1.8.0_u66/bin
+
+To deactivate that version of Java, just exit the terminal session.
+
+Install with:
+
+    > sudo install jenv /usr/local/bin
+
+See the help:
+
+    > jenv --help
