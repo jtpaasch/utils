@@ -63,7 +63,7 @@ then
     return 1
 fi
 
-export PATH=$PATH:$JAVA_LOCATION
+export PATH=$JAVA_LOCATION:$PATH
 echo "Using $JAVA_LOCATION"
 echo -n `javac -version`
 echo -n `java -version`
