@@ -6,36 +6,36 @@ Scripts, programs, and other utilities I use frequently.
 ## activate
 
 Activate a Python virtual environment by running the following command
-in the current directory::
+in the current directory:
 
     > . activate
 
-That, in turn, runs this::
+That, in turn, runs this:
 
     > . venv/bin/activate
 
-If the virtual env directory is named differently, e.g., ``pyvenv``, use
-the ``--venv`` flag:
+If the virtual env directory is named differently, e.g., `pyvenv`, use
+the `--venv` flag:
 
     > . activate --venv pyvenv
 
-Install with::
+Install with:
 
     > sudo install activate /usr/local/bin
 
-See the help::
+See the help:
 
     > . activate --help
 
 
 ## screens
 
-Turn on/off an ``xrandr`` screen configuration/profile. For instance, to turn
-on my office screens, I do this::
+Turn on/off an `xrandr` screen configuration/profile. For instance, to turn
+on my office screens, I do this:
 
     > screens office on
 
-At the end of the day, I turn them off::
+At the end of the day, I turn them off:
 
     > screens office off
 
@@ -51,9 +51,9 @@ See the help:
 ## jenv
 
 Activate a particular version of Java. For instance, to use the Java
-installed at ``~/jubbajdk/jdk1.8.0_u66``, I'd do this:
+installed at `~/jubbajdk/jdk1.8.0_u66`, I'd do this:
 
-    > . jenv ~/jubbajdk/jdk1.8.0_u66/bin
+    > . jenv ~/jubbajdk/jdk1.8.0_u66
 
 To deactivate that version of Java, just exit the terminal session.
 
@@ -63,4 +63,22 @@ Install with:
 
 See the help:
 
-    > jenv --help
+    > . jenv --help
+
+
+## mvnenv
+
+Activate a particular version of Maven. For instance, to use the Maven
+installed at `~/maven/apache-maven-3.3.3`, I'd do this:
+
+    > . mvnenv ~/maven/apache-maven-3.3.3
+
+To deactivate that version of Maven, just exit the terminal session.
+
+Install with:
+
+    > sudo install mvnenv /usr/local/bin
+
+See the help:
+
+    > . mvnenv --help
