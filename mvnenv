@@ -1,0 +1,80 @@
+#!/bin/sh
+
+SCRIPT=$0
+
+function usage() {
+    echo "Usage: $SCRIPT MAVEN_LOCATION"
+    echo ""
+    echo "  Activate a Maven version for use."
+    echo ""
+    echo "Arguments:"
+    echo "  MAVEN_LOCATION  A folder where Maven is installed."
+    echo ""
+    echo "Example:"
+    echo "  $SCRIPT ~/maven/apache-maven-3.3.3"
+}
+
+# If no arguments, display the usage.
+if [ $# -eq 0 ]
+then
+    usage
+    return 1
+fi
+
+# Parse any arguments passed in.
+while [ $# -gt 0 ]
+do
+
+    case $1 in
+
+        --help)
+            usage
+            return 1
+            ;;
+
+        *)
+            MAVEN_LOCATION=$1
+            ;;
+    esac
+    shift
+
+done
+
+# Make sure `java` is available.
+command -v java >/dev/null 2>&1
+HAS_JAVA=$?
+if [ $HAS_JAVA -eq "1" ]
+then
+    echo "Java is not available."
+    echo "Maven won't work without Java."
+    return 1
+fi
+
+# Make sure $MAVEN_LOCATION is a directory.
+if [ ! -d $MAVEN_LOCATION ]
+then
+    echo "'$MAVEN_LOCATION' is not a valid directory."
+    usage
+    return 1
+fi
+
+# Make sure there's a /bin directory.
+MAVEN_BIN=$MAVEN_LOCATION/bin
+if [ ! -d $MAVEN_BIN ]
+then
+    echo "No 'bin' folder in '$MAVEN_LOCATION'."
+    usage
+    return 1
+fi
+
+# Make sure there's a `mvn` program in the /bin directory.
+if [ ! -f $MAVEN_BIN/mvn ]
+then
+    echo "No mvn at '$MAVEN_BIN'."
+    usage
+    return 1
+fi
+
+export PATH=$MAVEN_BIN:$PATH
+echo "Using $MAVEN_LOCATION"
+mvn --version

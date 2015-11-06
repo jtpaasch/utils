@@ -11,9 +11,10 @@ function usage() {
     echo "  JAVA_LOCATION  A folder with java and javac."
     echo ""
     echo "Example:"
-    echo "  $SCRIPT ~/java/jdk1.8.0_66/bin"
+    echo "  $SCRIPT ~/java/jdk1.8.0_66"
 }
 
+# If no arguments, display usage.
 if [ $# -eq 0 ]
 then
     usage
@@ -47,23 +48,32 @@ then
     return 1
 fi
 
-# Make sure there's a `java` program there.
-if [ ! -f $JAVA_LOCATION/java ]
+# Make sure there's a /bin directory in $JAVA_LOCATION.
+JAVA_BIN=$JAVA_LOCATION/bin
+if [ ! -d $JAVA_BIN ]
 then
-    echo "No java at '$JAVA_LOCATION'"
+    echo "No 'bin' in '$JAVA_LOCATION'."
     usage
     return 1
 fi
 
-# Make sure there's a `javac` program there.
-if [ ! -f $JAVA_LOCATION/javac ]
+# Make sure there's a `java` program in $JAVA_BIN
+if [ ! -f $JAVA_BIN/java ]
 then
-    echo "No javac at '$JAVA_LOCATION'"
+    echo "No java in '$JAVA_BIN'"
     usage
     return 1
 fi
 
-export PATH=$JAVA_LOCATION:$PATH
+# Make sure there's a `javac` program in $JAVA_BIN
+if [ ! -f $JAVA_BIN/javac ]
+then
+    echo "No javac in '$JAVA_BIN'"
+    usage
+    return 1
+fi
+
+export PATH=$JAVA_BIN:$PATH
 echo "Using $JAVA_LOCATION"
 echo -n `javac -version`
 echo -n `java -version`
