@@ -76,5 +76,6 @@ then
 fi
 
 export PATH=$MAVEN_BIN:$PATH
-echo "Using $MAVEN_LOCATION"
+echo "Using: $MAVEN_LOCATION"
+echo "Maven: `which mvn`" 
 mvn --version

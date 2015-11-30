@@ -48,37 +48,56 @@ See the help:
     > screens --help
 
 
-## jenv
+## use-java
 
 Activate a particular version of Java. For instance, to use the Java
 installed at `~/jubbajdk/jdk1.8.0_u66`, I'd do this:
 
-    > . jenv ~/jubbajdk/jdk1.8.0_u66
+    > . use-java ~/jubbajdk/jdk1.8.0_u66
 
 To deactivate that version of Java, just exit the terminal session.
 
 Install with:
 
-    > sudo install jenv /usr/local/bin
+    > sudo install use-java /usr/local/bin
 
 See the help:
 
-    > . jenv --help
+    > . use-java --help
 
 
-## mvnenv
+## use-maven
 
 Activate a particular version of Maven. For instance, to use the Maven
 installed at `~/maven/apache-maven-3.3.3`, I'd do this:
 
-    > . mvnenv ~/maven/apache-maven-3.3.3
+    > . use-maven ~/maven/apache-maven-3.3.3
 
 To deactivate that version of Maven, just exit the terminal session.
 
 Install with:
 
-    > sudo install mvnenv /usr/local/bin
+    > sudo install use-maven /usr/local/bin
 
 See the help:
 
-    > . mvnenv --help
+    > . use-maven --help
+
+
+## use-python
+
+Activate a particular version of Python. For instance, to use the Python
+installed at `~/python/Python-3.5.0`, I'd do this:
+
+    > . use-python ~/python/Python-3.5.0
+
+To deactivate that version of Python, just exit the terminal session.
+
+Install with:
+
+    > sudo install use-python /usr/local/bin
+
+See the help:
+
+    > . use-python --help
+

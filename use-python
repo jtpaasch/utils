@@ -1,0 +1,73 @@
+#!/bin/sh
+
+SCRIPT=$0
+
+function usage() {
+    echo "Usage: $SCRIPT PYTHON_LOCATION"
+    echo ""
+    echo "  Activate a Python version for use."
+    echo ""
+    echo "Arguments:"
+    echo "  PYTHON_LOCATION  A folder with python and its tools."
+    echo ""
+    echo "Example:"
+    echo "  $SCRIPT ~/python/Python-3.5"
+}
+
+# If no arguments, display usage.
+if [ $# -eq 0 ]
+then
+    usage
+    return 1
+fi
+
+# Parse any arguments passed in.
+while [ $# -gt 0 ]
+do
+
+    case $1 in
+
+        --help)
+            usage
+            return 1
+            ;;
+
+        *)
+            PYTHON_LOCATION=$1
+            ;;
+    esac
+    shift
+
+done
+
+# Make sure $PYTHON_LOCATION is a directory.
+if [ ! -d $PYTHON_LOCATION ]
+then
+    echo "'$PYTHON_LOCATION' is not a valid directory."
+    usage
+    return 1
+fi
+
+# Make sure there's a `python` program in $PYTHON_LOCATION
+if [ ! -f $PYTHON_LOCATION/python ]
+then
+    echo "No python in '$PYTHON_LOCATION'"
+    usage
+    return 1
+fi
+
+# Make sure there's a `pyvenv` program.
+PYVENV_LOCATION=$PYTHON_LOCATION/Tools/scripts
+if [ ! -f $PYVENV_LOCATION/pyvenv ]
+then
+    echo "No pyvenv in '$PYVENV_LOCATION'"
+    usage
+    return 1
+fi
+
+export PATH=$PYTHON_LOCATION:$PYVENV_LOCATION:$PATH
+echo "Using: $PYTHON_LOCATION"
+echo "Python: `which python`"
+echo "Pyvenv: `which pyvenv`"
+echo `python --version`
+ 
