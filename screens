@@ -31,11 +31,13 @@ case $1 in
             on) 
                 xrandr --output HDMI1 --auto --right-of eDP1
                 xrandr --output HDMI2 --auto --right-of HDMI1
+		xrandr --output eDP1 --off
                 ;;
 
             off)
                 xrandr --output HDMI1 --off
                 xrandr --output HDMI2 --off
+		xrandr --output eDP1 --auto
                 ;;
             
             *) usage;;
