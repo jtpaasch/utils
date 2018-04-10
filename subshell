@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+script="${BASH_SOURCE[0]}"
+cmd_only=false
+sources=()
+cmd=()
+
+usage() {
+    echo "USAGE: ${script} [OPTIONS] -- CMD"
+    echo ""
+    echo "  Execute a CMD, optionally sourcing files first."
+    echo ""
+    echo "OPTIONS:"
+    echo "  -h|--help Print this help."
+    echo "  -s|--source FILE Source FILE before running CMD."
+    echo ""
+    echo "NOTE:"
+    echo "  You can specify -s|--source FILE multiple times."
+    echo "  Each FILE will be sourced in the order it's specified."
+    echo "  Specify all -s|--source FILE options before --."
+    echo "  Everything after -- is treated as the CMD."
+    echo ""
+    echo "EXAMPLE:"
+    echo "  ${script} -s env1.sh -s env2.sh -- python myprog.py"
+}
+
+while (( "${#}" )); do
+    case "${1}" in
+
+        --)
+            cmd_only=true
+            ;;
+
+        -h|--help)
+            if [[ "${cmd_only}" != true ]]; then
+                usage
+                exit 2
+            fi
+            ;;
+
+        -s|--source)
+            if [[ "${cmd_only}" != true ]]; then
+                shift
+                sources=("${sources[@]}" "${1}")
+            fi
+            ;;
+
+        *)
+            cmd=("${cmd[@]}" "${1}")
+            ;;
+
+    esac
+    shift
+done
+
+if [[ "${cmd_only}" == "false" ]]; then
+    echo "Error: specify a -- CMD. See ${script} --help."
+    exit 1
+fi
+
+for file in "${sources[@]}"; do
+    if [[ ! -f "${file}" ]]; then
+        echo "Error: no such file: '${file}'. See ${script} --help."
+        exit 1
+    fi
+done
+
+for file in "${sources[@]}"; do
+    . "${file}"
+done
+
+eval "${cmd[@]}"
